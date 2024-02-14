@@ -1,3 +1,5 @@
+#This project utilizes the following Superstore data:
+
 CREATE TABLE superstore (
     item_id INTEGER PRIMARY KEY,
     item_name TEXT,
@@ -24,3 +26,25 @@ VALUES
     (13, 'Slow Cooker', 'Appliances', 49.95, 30, 4.7),
     (14, 'Cutlery Set', 'Kitchen Supplies', 34.50, 40, 4.4),
     (15, 'Cozy Throw Blanket', 'Furnishings', 24.99, 100, 4.2);
+
+#For this project, I used SQL to query the Superstore database to find information about items sold at the store, inventory, and pricing. 
+
+#Use a SELECT statement to order the items by price.
+SELECT item_name, price
+FROM superstore
+ORDER BY price desc;
+
+#Show a statistic about the number of items for sale in each category.
+SELECT COUNT(category), category
+FROM superstore
+GROUP BY category;
+
+#Show a statistic about the price for items in the category of "Kitchen Supplies".
+SELECT AVG (price), category
+FROM superstore
+WHERE category = "Kitchen Supplies";
+
+#Use a SELECT statement and data filtering to determine the number of a specific item for sale. 
+SELECT (item_name), stock_quantity
+FROM superstore
+WHERE item_name = "Premium Coffee Maker";

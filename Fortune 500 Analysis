@@ -1,3 +1,5 @@
+#This analysis used the following Fortune 500 dataset:
+
 CREATE TABLE fortune_companies (
     company_id INTEGER PRIMARY KEY,
     company_name TEXT,
@@ -55,3 +57,36 @@ VALUES
     ('Company II', 'Telecommunications', 110.5, 2000, 1, 21, 12, 4.9),
     ('Company JJ', 'Manufacturing', 370.0, 3100, 1, 20, 12, 7.6),
     ('Company KK', 'Healthcare', 150.2, 3400, 0, 16, 8, 5.3);
+
+#Analysis
+
+#Assign the companies in the Fortune 500 dataset a rating based on the amount of maternal leave offered to employees.
+
+SELECT company_name, maternity_leave_weeks,
+CASE WHEN maternity_leave_weeks>=14 THEN "Excellent"
+WHEN maternity_leave_weeks>=12 THEN "Good"
+WHEN maternity_leave_weeks>=10 THEN "Average"
+ELSE "Below Average"
+END AS "Maternal Health Care"
+FROM fortune_companies
+ORDER BY maternity_leave_weeks desc;
+
+#Assign the companies in the Fortune 500 dataset a rating based on the amount of paid time off days offered to employees.
+
+SELECT company_name, paid_time_off_days,
+CASE WHEN paid_time_off_days >=22 THEN "Excellent"
+WHEN paid_time_off_days >=20 THEN "Good"
+WHEN paid_time_off_days >= 18 THEN "Average"
+ElSE "Below Average"
+END AS "Vacation Days Available"
+FROM fortune_companies
+ORDER BY paid_time_off_days desc;
+
+#List the companies in the Fortune 500 dataset that offer health care benefits AND a good or better rating for maternal leave offered and paid days off. 
+
+SELECT *
+FROM fortune_companies
+WHERE healthcare_benefits=1
+AND maternity_leave_weeks>=12
+AND paid_time_off_days>=20
+ORDER BY paid_time_off_days desc;
